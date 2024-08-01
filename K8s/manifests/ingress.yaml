@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-web-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: go-web-app.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: go-web-app
+            port:
+              number: 80
+  # Optional: Add TLS configuration if you have SSL certificates
+  # tls:
+  # - hosts:
+  #   - your-domain.com
+  #   secretName: your-tls-secret
